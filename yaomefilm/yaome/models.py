@@ -32,5 +32,5 @@ class Country(models.Model):
 class Reviews(models.Model):
     content = models.TextField()
     film = models.ForeignKey(Film, related_name='film', on_delete=models.CASCADE)
-    owner = models.ForeignKey(User, related_name='user', on_delete=models.CASCADE)
+    owner = models.ForeignKey(User, related_name='owner', on_delete=models.CASCADE)
     

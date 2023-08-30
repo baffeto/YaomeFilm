@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home page</title>
+</head>
+<body>
+    <h1>Результаты поиска</h1>
+
+    <form method="get">
+        <input type="text" name="q" value="{{ request.GET.q }}">
+        <button type="submit">Найти</button>
+    </form>
+
+    {% if films %}
+        <ul>
+            {% for film in films %}
+                <li><a href="/film/{{ film.id }}">{{ film.title }}</a></li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Нет результатов.</p>
+    {% endif %}
+
+    <script>
+    $(document).ready(function() {
+        $('#search-input').on('input', function() {
+            var query = $(this).val();
+            $.ajax({
+                url: '/search/ajax/',
+                data: {
+                    'q': query
+                },
+                success: function(data) {
+                    var results = '';
+                    if (data.length === 0) {
+                        results = '<div>Нет результатов.</div>';
+                    } else {
+                        for (var i = 0; i < data.length; i++) {
+                            results += '<div>' + data[i].title + '</div>';
+                        }
+                    }
+                    $('#search-results').html(results);
+                }
+            });
+        });
+    });
+    </script>
+</body>
+</html>

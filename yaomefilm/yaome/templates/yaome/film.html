@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    Давайте посмотрим информацию о фильме
+    <p>{{ film.id }}</p>
+    <p>{{ film.title }}</p>
+    <p>{{ film.description }}</p>
+
+    <h2>Актеры</h2>
+    {% for act in film.actors.all %}
+        {{ act.name }} <br>
+    {% endfor %}
+
+    <h2>Категория</h2>
+    {% for cat in film.category.all %}
+        {{ cat.name }} <br>
+    {% endfor %}
+
+    <a href="/">Return</a>
+</body>
+</html>
